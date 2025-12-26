@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. حماية ملف البيئة والملفات الحساسة (الأهم أمنياً)
+    <FilesMatch "^\.env|composer\.(json|lock)|package\.json|artisan">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+
+    # 2. توجيه الزوار لمجلد public (لإصلاح هيكلية الموقع)
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
